@@ -182,7 +182,7 @@ class Sheet
      *
      * @param $bool
      */
-    public function setFreeHeaders($bool = true)
+    public function setFreezeHeaders($bool = true)
     {
         $this->freezeHeaders = $bool;
         $this->hasSetFreezeHeaders = true;
