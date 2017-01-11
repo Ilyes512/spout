@@ -317,12 +317,16 @@ EOD;
 
                 $content .= ' applyAlignment="' . $numOfAlignments . '">';
 
-                if ($style->shouldWrapText()) {
-                    $content .= '<alignment wrapText="1"/>';
-                }
-
-                if ($style->shouldApplyTextAlign()) {
-                    $content .= '<alignment vertical="' . $style->getTextAlign() . '" />';
+                switch (true) {
+                    case $style->shouldWrapText() && $style->shouldApplyTextAlign():
+                        $content .= '<alignment wrapText="1" vertical="' . $style->getTextAlign() . '"/>';
+                        break;
+                    case $style->shouldWrapText():
+                        $content .= '<alignment wrapText="1"/>';
+                        break;
+                    case $style->shouldApplyTextAlign():
+                        $content .= '<alignment vertical="' . $style->getTextAlign() . '" />';
+                        break;
                 }
 
                 $content .= '</xf>';
