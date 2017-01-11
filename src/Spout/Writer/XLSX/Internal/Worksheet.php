@@ -30,6 +30,14 @@ class Worksheet implements WorksheetInterface
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
 EOD;
 
+    const SHEET_XML_FREEZE_HEADER = <<<EOD
+<sheetViews>
+    <sheetView workbookViewId="0">
+        <pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen" />
+    </sheetView>
+</sheetViews>
+EOD;
+
     /** @var \Box\Spout\Writer\Common\Sheet The "external" sheet */
     protected $externalSheet;
 
@@ -92,6 +100,11 @@ EOD;
         $this->throwIfSheetFilePointerIsNotAvailable();
 
         fwrite($this->sheetFilePointer, self::SHEET_XML_FILE_HEADER);
+
+        if ($this->externalSheet->shouldApplyFreezeHeaders() && $this->externalSheet->getFreezeHeaders()) {
+            fwrite($this->sheetFilePointer, self::SHEET_XML_FREEZE_HEADERS);
+        }
+
         fwrite($this->sheetFilePointer, '<sheetData>');
     }
 

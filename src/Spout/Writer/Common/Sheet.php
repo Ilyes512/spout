@@ -33,6 +33,11 @@ class Sheet
     /** @var \Box\Spout\Common\Helper\StringHelper */
     protected $stringHelper;
 
+    /** @var bool Whether to freeze the first row (headers) or not */
+    protected $freezeHeaders = false;
+    /** @var bool Whether the freeze headers have been set or not */
+    protected $hasSetFreezeHeaders = false;
+
     /**
      * @param int $sheetIndex Index of the sheet, based on order in the workbook (zero-based)
      */
@@ -170,5 +175,36 @@ class Sheet
         }
 
         return true;
+    }
+
+    /**
+     * Freeze or unfreeze the first row.
+     *
+     * @param $bool
+     */
+    public function setFreeHeaders($bool = true)
+    {
+        $this->freezeHeaders = $bool;
+        $this->hasSetFreezeHeaders = true;
+    }
+
+    /**
+     * Whether the first row has been frozen or not.
+     *
+     * @return bool
+     */
+    public function getFreezeHeaders()
+    {
+        return $this->freezeHeaders;
+    }
+
+    /**
+     * Whether the freeze headers settings have been set or not.
+     *
+     * @return bool
+     */
+    public function shouldApplyFreezeHeaders()
+    {
+        return $this->hasSetFreezeHeaders;
     }
 }
