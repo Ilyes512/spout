@@ -147,6 +147,19 @@ class StyleBuilder
     }
 
     /**
+     * Set the text alignment
+     *
+     * @param $alignment
+     *
+     * @return $this
+     */
+    public function setTextAlignment($alignment)
+    {
+        $this->style->setTextAlign($alignment);
+        return $this;
+    }
+
+    /**
      * Returns the configured style. The style is cached and can be reused.
      *
      * @api
