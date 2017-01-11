@@ -449,7 +449,7 @@ class Style
         if (!$this->hasSetWrapText && $baseStyle->shouldWrapText()) {
             $styleToUpdate->setShouldWrapText();
         }
-        if (!$this->hasSetTextAlign && $baseStyle->shouldApplyTextAlign()) { //
+        if (!$this->getTextAlign() && $baseStyle->shouldApplyTextAlign()) {
             $styleToUpdate->setTextAlign($baseStyle->getTextAlign());
         }
         if (!$this->getBorder() && $baseStyle->shouldApplyBorder()) {
