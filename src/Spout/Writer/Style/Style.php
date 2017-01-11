@@ -61,6 +61,11 @@ class Style
     /** @var bool Whether the wrap text property was set */
     protected $hasSetWrapText = false;
 
+    /** @var string The cell alignment */
+    protected $textAlign = null;
+    /** @var bool Whether the cell alignment was set */
+    protected $hasSetTextAlign = false;
+
     /**
      * @var Border
      */
@@ -326,6 +331,34 @@ class Style
     }
 
     /**
+     * @return string
+     */
+    public function getTextAlign()
+    {
+        return $this->textAlign;
+    }
+
+    /**
+     * @param string $alignment
+     *
+     * @return bool
+     */
+    public function setTextAlign($alignment)
+    {
+        $this->textAlign = $alignment;
+        $this->hasSetTextAlign = true;
+        return $this;
+    }
+
+    /**
+     * @return Style
+     */
+    public function shouldApplyTextAlign()
+    {
+        return $this->hasSetTextAlign;
+    }
+
+    /**
      * Serializes the style for future comparison with other styles.
      * The ID is excluded from the comparison, as we only care about
      * actual style properties.
@@ -415,6 +448,9 @@ class Style
     {
         if (!$this->hasSetWrapText && $baseStyle->shouldWrapText()) {
             $styleToUpdate->setShouldWrapText();
+        }
+        if (!$this->hasSetTextAlign && $baseStyle->shouldApplyTextAlign()) { //
+            $styleToUpdate->setTextAlign($baseStyle->getTextAlign());
         }
         if (!$this->getBorder() && $baseStyle->shouldApplyBorder()) {
             $styleToUpdate->setBorder($baseStyle->getBorder());
