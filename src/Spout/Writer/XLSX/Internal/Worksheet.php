@@ -30,7 +30,7 @@ class Worksheet implements WorksheetInterface
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
 EOD;
 
-    const SHEET_XML_FREEZE_HEADER = <<<EOD
+    const SHEET_XML_FREEZE_HEADERS = <<<EOD
 <sheetViews>
     <sheetView workbookViewId="0">
         <pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen" />
